@@ -12,9 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>Images with Dalle-2 </title>
+        <title>Create Images Dalle-2 </title>
       </head>
-      <body className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black">
+      <body className="bg-[conic-gradient(at_right,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black bg-no-repeat min-h-screen">
         {children}
       </body>
     </html>
