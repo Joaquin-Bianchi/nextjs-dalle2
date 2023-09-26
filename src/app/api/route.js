@@ -1,5 +1,5 @@
 // api/generate.js (o el nombre que desees)
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 export default async function handler(req, res) {
   const { prompt } = req.body;
