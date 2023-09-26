@@ -1,4 +1,4 @@
-// api/generate.js (o el nombre que desees)
+
 import fetch from "node-fetch";
 
 export default async function handler(req, res) {

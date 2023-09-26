@@ -16,14 +16,14 @@ export default function Home() {
     };
 
     try {
-      const response = await fetch("/api/route.js", options);
+      const response = await fetch("/api/route", options);
       if (!response.ok) {
         throw new Error("Error al obtener la imagen");
       }
 
       const responseData = await response.json();
       const imageUrl = responseData.imageUrl;
-      setGeneratedImage(imageUrl);
+      setImageUrl(imageUrl);
     } catch (error) {
       console.error(error);
     }
