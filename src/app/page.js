@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // Estado para la URL de la imagen
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleGenerateImage = async () => {
     const options = {
@@ -11,23 +11,19 @@ export default function Home() {
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        "X-Prodia-Key": "e8346eb2-6187-4748-a42f-7241580ee1f1",
       },
       body: JSON.stringify({ prompt: prompt }),
     };
 
     try {
-      const response = await fetch(
-        "https://api.prodia.com/v1/sd/generate",
-        options
-      );
+      const response = await fetch("/api/generate", options);
       if (!response.ok) {
         throw new Error("Error al obtener la imagen");
       }
 
       const responseData = await response.json();
-      const job = responseData.job; // Obtenemos el "job" de la respuesta
-      setImageUrl(`https://images.prodia.xyz/${job}.png`);
+      const imageUrl = responseData.imageUrl;
+      setGeneratedImage(imageUrl);
     } catch (error) {
       console.error(error);
     }

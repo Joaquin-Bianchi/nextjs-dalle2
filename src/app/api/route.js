@@ -1,31 +1,32 @@
-// const express = require("express");
-// const axios = require("axios");
+// api/generate.js (o el nombre que desees)
+const fetch = require("node-fetch");
 
-// const app = express();
-// const port = 3001; // Puerto para tu servidor intermedio
+export default async function handler(req, res) {
+  const { prompt } = req.body;
 
-// app.use(express.json());
+  const options = {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      "X-Prodia-Key": "e8346eb2-6187-4748-a42f-7241580ee1f1",
+    },
+    body: JSON.stringify({ prompt: prompt }),
+  };
 
-// app.post("/generate-image", async (req, res) => {
-//   try {
-//     const response = await axios.post(
-//       "https://api.prodia.com/v1/sd/generate",
-//       req.body,
-//       {
-//         headers: {
-//           "X-Prodia-Key": "e8346eb2-6187-4748-a42f-7241580ee1f1",
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
+  try {
+    const response = await fetch(
+      "https://api.prodia.com/v1/sd/generate",
+      options
+    );
+    if (!response.ok) {
+      throw new Error("Error al obtener la imagen");
+    }
 
-//     res.json(response.data);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Error al obtener la imagen" });
-//   }
-// });
-
-// app.listen(port, () => {
-//   console.log(`Servidor intermedio escuchando en el puerto ${port}`);
-// });
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener la imagen" });
+  }
+}
