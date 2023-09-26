@@ -16,7 +16,7 @@ export default function Home() {
     };
 
     try {
-      const response = await fetch("/api/generate", options);
+      const response = await fetch("/api/route", options);
       if (!response.ok) {
         throw new Error("Error al obtener la imagen");
       }
