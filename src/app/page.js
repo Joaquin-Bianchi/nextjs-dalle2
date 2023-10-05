@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import { RiImage2Line, RiImageEditFill } from "react-icons/ri";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -62,29 +62,37 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center mt-8">
-      <h1 className="text-4xl text-white font-sans">Image Generator</h1>
+      <div className=" flex gap-1 ">
+        <RiImage2Line size="50px" className="text-white" />
+        <h1 className="text-5xl text-white font-sans font-bold   ">
+          xProdia Image Generation
+        </h1>
+      </div>
       <form
-        className="flex items-baseline mt-5"
+        className="flex items-baseline w-[540px] mt-14"
         onSubmit={async (e) => {
           e.preventDefault();
           handleGenerateImage();
         }}
       >
         <input
-          className="bg-gray-800 px-2 py-1 text-lg text-white rounded"
+          className="bg-[#3f3f3f] px-7 py-3 w-full text-xl text-white   rounded outline-none"
           type="text"
           placeholder="Write your prompt"
           onChange={(e) => setPrompt(e.target.value)}
           value={prompt}
           required
         />
-        <button className="bg-yellow-400 px-2 py-1 text-lg mt-2 rounded font-normal text-slate-950 hover:bg-yellow-500">
+        <button className="bg-yellow-400 px-7 py-3 text-lg mt-2 rounded font-normal text-slate-950 hover:bg-yellow-500">
           Generate
         </button>
       </form>
-      {imageUrl && (
-        <img src={imageUrl} alt="Generated Image" width={200} height={200} />
-      )}
+      <div className="bg-[#1e1e1e] w-[540px] h-[540px] text-white grid place-content-center">
+        <h3>Esperando el prompt</h3>
+        {imageUrl && (
+          <img src={imageUrl} alt="Generated Image" width={200} height={200} />
+        )}
+      </div>
     </main>
   );
 }
